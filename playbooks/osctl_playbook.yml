@@ -1,0 +1,217 @@
+---
+- name: Interact with osctl API
+  hosts: localhost
+  tasks:
+    - name: Get RAM usage
+      osctl_module:
+        endpoint: "ram"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_ram
+
+    - name: Display RAM usage
+      debug:
+        msg: "{{ result_ram.original_message }}"
+
+    - name: Get Disk usage
+      osctl_module:
+        endpoint: "disk"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_disk
+
+    - name: Display Disk usage
+      debug:
+        msg: "{{ result_disk.original_message }}"
+
+    - name: Manage service (start nginx)
+      osctl_module:
+        endpoint: "service"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+        params:
+          action: "start"
+          service: "nginx"
+      register: result_service_start
+
+    - name: Display service start result
+      debug:
+        msg: "{{ result_service_start.original_message }}"
+
+    - name: Manage service (stop nginx)
+      osctl_module:
+        endpoint: "service"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+        params:
+          action: "stop"
+          service: "nginx"
+      register: result_service_stop
+
+    - name: Display service stop result
+      debug:
+        msg: "{{ result_service_stop.original_message }}"
+
+    - name: Get top processes by CPU usage
+      osctl_module:
+        endpoint: "top"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_top
+
+    - name: Display top processes
+      debug:
+        msg: "{{ result_top.original_message }}"
+
+    - name: Get last 10 errors from the journal
+      osctl_module:
+        endpoint: "errors"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_errors
+
+    - name: Display journal errors
+      debug:
+        msg: "{{ result_errors.original_message }}"
+
+    - name: Get last 20 logged-in users
+      osctl_module:
+        endpoint: "users"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_users
+
+    - name: Display last logged-in users
+      debug:
+        msg: "{{ result_users.original_message }}"
+
+    - name: Get system uptime
+      osctl_module:
+        endpoint: "uptime"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_uptime
+
+    - name: Display system uptime
+      debug:
+        msg: "{{ result_uptime.original_message }}"
+
+    - name: Get operating system name and kernel version
+      osctl_module:
+        endpoint: "osinfo"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_osinfo
+
+    - name: Display OS info
+      debug:
+        msg: "{{ result_osinfo.original_message }}"
+
+    - name: Shutdown the system
+      osctl_module:
+        endpoint: "shutdown"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_shutdown
+
+    - name: Display shutdown result
+      debug:
+        msg: "{{ result_shutdown.original_message }}"
+
+    - name: Reboot the system
+      osctl_module:
+        endpoint: "reboot"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_reboot
+
+    - name: Display reboot result
+      debug:
+        msg: "{{ result_reboot.original_message }}"
+
+    - name: Get IP addresses of all interfaces
+      osctl_module:
+        endpoint: "ip"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_ip
+
+    - name: Display IP addresses
+      debug:
+        msg: "{{ result_ip.original_message }}"
+
+    - name: Get active firewalld rules
+      osctl_module:
+        endpoint: "firewall"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_firewall
+
+    - name: Display firewalld rules
+      debug:
+        msg: "{{ result_firewall.original_message }}"
+
+    - name: Update OS packages
+      osctl_module:
+        endpoint: "update"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_update
+
+    - name: Display update packages result
+      debug:
+        msg: "{{ result_update.original_message }}"
+
+    - name: List all Docker containers
+      osctl_module:
+        endpoint: "containers"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_containers
+
+    - name: Display Docker containers
+      debug:
+        msg: "{{ result_containers.original_message }}"
+
+    - name: List all Docker images
+      osctl_module:
+        endpoint: "images"
+        host: "localhost"
+        port: 12000
+        username: "admin"
+        password: "password"
+      register: result_images
+
+    - name: Display Docker images
+      debug:
+        msg: "{{ result_images.original_message }}"
